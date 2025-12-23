@@ -77,9 +77,14 @@ export const segmentProjects: Record<string, LabsProject> = {
           image: "/projects/architekten/uploaded_image_2_1766502821485.png",
         },
         {
-          title: "Details",
-          description: "Sichtbare Qualität in jeder Kante.",
+          title: "Sichtbare Qualität",
+          description: "Präzision in jeder Kante und jedem Übergang.",
           image: "/projects/architekten/uploaded_image_3_1766502821485.png",
+        },
+        {
+          title: "Atmosphäre",
+          description: "Wenn Architektur zur Melodie wird.",
+          image: "/projects/architekten/uploaded_image_4_1766502821485.png",
         },
       ],
     },
