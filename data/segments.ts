@@ -32,17 +32,17 @@ export const segmentProjects: Record<string, LabsProject> = {
         {
           title: "Beratung",
           description: "Wir hören zu und entwickeln gemeinsam Ihr Konzept.",
-          image: "/projects/privatkunden/slide-1.jpg",
+          image: "/projects/privatkunden/1.png",
         },
         {
           title: "Farbe & Struktur",
           description: "Die Wahl der richtigen Materialien für Ihr Wohlbefinden.",
-          image: "/projects/privatkunden/slide-2.jpg",
+          image: "/projects/privatkunden/2.png",
         },
         {
           title: "Ausführung",
           description: "Sauberkeit und Präzision in Ihren vier Wänden.",
-          image: "/projects/privatkunden/slide-3.jpg",
+          image: "/projects/privatkunden/3.png",
         },
       ],
     },
@@ -111,17 +111,17 @@ export const segmentProjects: Record<string, LabsProject> = {
         {
           title: "Dämmkern",
           description: "Die Basis für ein stabiles Raumklima.",
-          image: "/projects/wdvs/slide-1.jpg",
+          image: "/projects/wdvs/1.png",
         },
         {
           title: "Armierung",
           description: "Rissfrei und widerstandsfähig gegen Witterung.",
-          image: "/projects/wdvs/slide-2.jpg",
+          image: "/projects/wdvs/2.png",
         },
         {
           title: "Oberputz",
           description: "Die schützende Haut in Ihrer Wunschoptik.",
-          image: "/projects/wdvs/slide-3.jpg",
+          image: "/projects/wdvs/1.png", // Reuse high-end until user adds more
         },
       ],
     },
@@ -148,17 +148,17 @@ export const segmentProjects: Record<string, LabsProject> = {
         {
           title: "Untergrund",
           description: "Vorbereitung für eine perfekte Haftung.",
-          image: "/projects/innenputz/slide-1.jpg",
+          image: "/projects/innenputz/1.png",
         },
         {
           title: "Feinputz",
           description: "Die Veredelung für seidenglatte Oberflächen.",
-          image: "/projects/innenputz/slide-2.jpg",
+          image: "/projects/innenputz/2.png",
         },
         {
           title: "Finish",
           description: "Natürliche Pigmente und Strukturen.",
-          image: "/projects/innenputz/slide-3.jpg",
+          image: "/projects/innenputz/1.png", // Reuse high-end until user adds more
         },
       ],
     },
@@ -185,17 +185,17 @@ export const segmentProjects: Record<string, LabsProject> = {
         {
           title: "Grundputz",
           description: "Der solide Schutz gegen Feuchtigkeit.",
-          image: "/projects/aussenputz/slide-1.jpg",
+          image: "/projects/aussenputz/1.png",
         },
         {
           title: "Gewebe",
           description: "Sicherheit gegen Risse und Spannungen.",
-          image: "/projects/aussenputz/slide-2.jpg",
+          image: "/projects/aussenputz/2.png",
         },
         {
           title: "Struktur",
           description: "Individuelle Oberflächen nach Ihrem Geschmack.",
-          image: "/projects/aussenputz/slide-3.jpg",
+          image: "/projects/aussenputz/1.png", // Reuse high-end until user adds more
         },
       ],
     },

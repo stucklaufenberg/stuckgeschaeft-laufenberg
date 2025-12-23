@@ -31,66 +31,75 @@ export default function ScrollTimelinePage({ data }: Props) {
         ease: "power4.out",
       });
 
-      // 2. Timeline Orchestration
       const slides = gsap.utils.toArray(".timeline-slide") as HTMLElement[];
       const totalSlides = slides.length;
+      
+      // CONFIG FROM USER SPEC
+      const SCROLL_WEIGHT = 250; // vh per slide
+      const INTRO_DURATION = 0.15; // 15% of total scroll for split transition
+      const SCRUB = 1.5;
 
-      // Pin the whole timeline section
-      const tl = gsap.timeline({
+      const mainTl = gsap.timeline({
         scrollTrigger: {
           trigger: timelineRef.current,
           start: "top top",
-          end: `+=${totalSlides * 100}%`,
+          end: `+=${(totalSlides * SCROLL_WEIGHT) + 100}vh`,
           pin: true,
-          scrub: 1.2,
+          scrub: SCRUB,
           anticipatePin: 1,
+          onUpdate: (self) => {
+            // Optional: Handle global state if needed
+          }
         },
       });
 
-      // Animate slides sequentially
+      // 1. INTRO PHASE (0% - 15%)
+      // Morph from Fullscreen-like state to Split Layout
+      mainTl.fromTo(".split-container", 
+        { width: "100%", x: 0 },
+        { width: "90%", x: 0, duration: INTRO_DURATION, ease: "none" }
+      );
+      
+      mainTl.fromTo(".content-column", 
+        { width: "0%", opacity: 0 },
+        { width: "33%", opacity: 1, duration: INTRO_DURATION, ease: "none" },
+        0
+      );
+
+      // 2. STACKING PHASE (15% - 100%)
       slides.forEach((slide, i) => {
-        if (i === 0) {
-          // First slide subtle zoom
-          tl.to(slide.querySelector(".slide-image"), { scale: 1.05, duration: 1 }, 0);
-        } else {
-          // Sequential entrance with "Antigravity" ease
-          tl.fromTo(
-            slide,
-            { opacity: 0, scale: 1.02, y: 30 },
+        const isLast = i === totalSlides - 1;
+        
+        // Stacking: Higher z-index for each subsequent slide
+        gsap.set(slide, { zIndex: 10 + i });
+
+        if (i > 0) {
+          // Slide enters from bottom
+          mainTl.fromTo(slide,
+            { yPercent: 100 },
             { 
-              opacity: 1, 
-              scale: 1, 
-              y: 0, 
-              duration: 1.2, 
-              ease: "expo.out" 
+              yPercent: 0, 
+              duration: 1, 
+              ease: "none" 
             },
-            i * 1.5 // Added delay for "hang time"
-          );
-          
-          tl.fromTo(
-            slide.querySelector(".slide-image"),
-            { scale: 1.1, filter: "grayscale(100%)", y: -20 },
-            { 
-              scale: 1, 
-              filter: "grayscale(20%)", 
-              y: 20, // Parallax depth
-              duration: 1.5,
-              ease: "power2.out"
-            },
-            i * 1.5
+            INTRO_DURATION + (i - 1) * (1 - INTRO_DURATION) / (totalSlides - 1)
           );
 
-          // Outgoing slide fade-out with offset
-          tl.to(
-            slides[i - 1],
-            { 
-              opacity: 0, 
-              scale: 0.98, 
-              filter: "blur(4px)",
-              pointerEvents: "none", 
-              duration: 0.8 
-            },
-            i * 1.5
+          // Parallax effect on the image inside
+          mainTl.fromTo(slide.querySelector(".slide-image"),
+            { yPercent: 20, scale: 1.1 },
+            { yPercent: 0, scale: 1, duration: 1, ease: "none" },
+            INTRO_DURATION + (i - 1) * (1 - INTRO_DURATION) / (totalSlides - 1)
+          );
+        }
+
+        // Text Sync: Fade + Zoom-in-95
+        const content = slide.querySelector(".slide-content");
+        if (content) {
+          mainTl.fromTo(content,
+            { opacity: 0, scale: 0.95 },
+            { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" },
+            INTRO_DURATION + (i) * (1 - INTRO_DURATION) / (totalSlides)
           );
         }
       });
@@ -151,62 +160,69 @@ export default function ScrollTimelinePage({ data }: Props) {
         </div>
       </section>
 
-      {/* 3. TIMELINE SECTION */}
       <section 
         id="projekte"
         ref={timelineRef} 
         className="relative h-screen w-full overflow-hidden bg-zinc-950 text-stone-100"
       >
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative h-[85vh] w-[95vw] max-w-7xl overflow-hidden rounded-sm bg-zinc-900 shadow-2xl md:h-[80vh] md:w-[90vw]">
-            {data.chapter.slides.map((slide, i) => (
-              <div 
-                key={i} 
-                className="timeline-slide absolute inset-0 flex h-full w-full flex-col overflow-hidden md:flex-row"
-              >
-                {/* Image Side - Adjusted for Portrait Sharpness */}
-                <div className="relative h-2/5 w-full overflow-hidden md:h-full md:w-3/5">
+          <div className="split-container relative h-full w-full overflow-hidden bg-zinc-900 shadow-2xl">
+            
+            {/* Left Content Side (Shared for all slides) */}
+            <div className="content-column absolute left-0 top-0 z-50 h-full bg-zinc-950 p-6 md:p-16 flex flex-col justify-center border-r border-zinc-800">
+              <div className="slide-content-container relative h-64 w-full">
+                {data.chapter.slides.map((slide, i) => (
+                  <div 
+                    key={`text-${i}`}
+                    className="slide-content absolute inset-0 flex flex-col justify-center opacity-0"
+                  >
+                    <div className="mb-4 flex items-center gap-4">
+                      <span className="font-mono text-[10px] opacity-40 md:text-xs">ITEM {String(i + 1).padStart(2, '0')}</span>
+                      <div className="h-px w-6 bg-zinc-800 md:w-8" />
+                    </div>
+                    <h3 className="mb-4 font-serif text-2xl font-light tracking-wide md:mb-6 md:text-4xl">
+                      {slide.title}
+                    </h3>
+                    <p className="font-sans text-xs font-light leading-relaxed text-zinc-400 md:text-sm">
+                      {slide.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 border-t border-zinc-800 pt-6 md:mt-12 md:pt-8">
+                <div className="flex flex-wrap gap-2">
+                  {data.chapter.tags.map((tag, tagIdx) => (
+                    <span key={`tag-${tagIdx}`} className="border border-zinc-800 px-2 py-0.5 text-[8px] uppercase tracking-widest text-zinc-500 md:px-2 md:py-1 md:text-[10px]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Image Side (Stacking) */}
+            <div className="absolute right-0 top-0 h-full w-full md:w-2/3">
+              {data.chapter.slides.map((slide, i) => (
+                <div 
+                  key={i} 
+                  className="timeline-slide absolute inset-0 h-full w-full overflow-hidden"
+                >
                   <div className="slide-image absolute inset-0 h-full w-full">
                     <Image
                       src={slide.image}
                       alt={slide.title}
                       fill
                       quality={95}
-                      sizes="(max-width: 768px) 100vw, 60vw"
+                      sizes="(max-width: 768px) 100vw, 66vw"
                       className="object-cover object-top grayscale transition-all duration-1000 hover:grayscale-0"
                       priority={i < 2}
                     />
                     <div className="absolute inset-0 bg-zinc-950/20" />
                   </div>
                 </div>
-
-                {/* Content Side */}
-                <div className="flex h-3/5 w-full flex-col justify-center bg-zinc-950 p-6 md:h-full md:w-2/5 md:p-16">
-                  <div className="mb-4 flex items-center gap-4">
-                    <span className="font-mono text-[10px] opacity-40 md:text-xs">ITEM {String(i + 1).padStart(2, '0')}</span>
-                    <div className="h-px w-6 bg-zinc-800 md:w-8" />
-                  </div>
-                  <h3 className="mb-4 font-serif text-2xl font-light tracking-wide md:mb-6 md:text-4xl">
-                    {slide.title}
-                  </h3>
-                  <p className="font-sans text-xs font-light leading-relaxed text-zinc-400 md:text-sm">
-                    {slide.description}
-                  </p>
-                  
-                  {i === data.chapter.slides.length - 1 && (
-                    <div className="mt-8 border-t border-zinc-800 pt-6 md:mt-12 md:pt-8">
-                      <div className="flex flex-wrap gap-2">
-                        {data.chapter.tags.map((tag, tagIdx) => (
-                          <span key={`tag-${tagIdx}`} className="border border-zinc-800 px-2 py-0.5 text-[8px] uppercase tracking-widest text-zinc-500 md:px-2 md:py-1 md:text-[10px]">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
