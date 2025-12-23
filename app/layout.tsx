@@ -27,19 +27,23 @@ export const metadata: Metadata = {
   },
 };
 
+import { SmoothScroll } from "@/components/SmoothScroll";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="exhibition-smooth-scroll">
+    <html lang="de">
       <body className={`${cormorant.variable} ${inter.variable} min-h-screen bg-stone-50 font-sans text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100`}>
-        <Header />
-        <main className="relative z-10 w-full overflow-x-hidden">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          <main className="relative z-10 w-full overflow-x-hidden">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -30,19 +30,29 @@ export const segmentProjects: Record<string, LabsProject> = {
       tags: ["Individuell", "Nachhaltig", "Premium"],
       slides: [
         {
-          title: "Beratung",
-          description: "Wir hören zu und entwickeln gemeinsam Ihr Konzept.",
+          title: "Ankunft",
+          description: "Ein Zuhause beginnt dort, wo Materialien zur Ruhe kommen.",
           image: "/projects/privatkunden/1.png",
         },
         {
-          title: "Farbe & Struktur",
-          description: "Die Wahl der richtigen Materialien für Ihr Wohlbefinden.",
+          title: "Lichtspiel",
+          description: "Wir gestalten Oberflächen, die mit dem natürlichen Rhythmus des Tages spielen.",
           image: "/projects/privatkunden/2.png",
         },
         {
-          title: "Ausführung",
-          description: "Sauberkeit und Präzision in Ihren vier Wänden.",
+          title: "Haptik",
+          description: "Echte Kalkputze fühlen sich so natürlich an, wie sie aussehen.",
           image: "/projects/privatkunden/3.png",
+        },
+        {
+          title: "Privatsphäre",
+          description: "Nahtlose Übergänge für eine Atmosphäre der Geborgenheit.",
+          image: "/projects/privatkunden/4.png",
+        },
+        {
+          title: "Ewigkeit",
+          description: "Wir bauen nicht für Trends, sondern für Generationen.",
+          image: "/projects/privatkunden/5.png",
         },
       ],
     },
@@ -109,19 +119,29 @@ export const segmentProjects: Record<string, LabsProject> = {
       tags: ["Efficiency", "Durability", "Modern"],
       slides: [
         {
-          title: "Dämmkern",
-          description: "Die Basis für ein stabiles Raumklima.",
+          title: "Kernkompetenz",
+          description: "Hocheffiziente Dämmlösungen, die sich nahtlos in die Architektur einfügen.",
           image: "/projects/wdvs/1.png",
         },
         {
-          title: "Armierung",
-          description: "Rissfrei und widerstandsfähig gegen Witterung.",
+          title: "Präzision",
+          description: "Absolut fluchtgerechte Kanten und perfekte Übergänge.",
           image: "/projects/wdvs/2.png",
         },
         {
-          title: "Oberputz",
-          description: "Die schützende Haut in Ihrer Wunschoptik.",
-          image: "/projects/wdvs/1.png", // Reuse high-end until user adds more
+          title: "Schutzhülle",
+          description: "Wetterschutz trifft auf höchste energetische Standards.",
+          image: "/projects/wdvs/3.png",
+        },
+        {
+          title: "Geometrie",
+          description: "Klare Linienführung ohne Kompromisse bei der Effizienz.",
+          image: "/projects/wdvs/4.png",
+        },
+        {
+          title: "Vollendung",
+          description: "Wenn Technik unsichtbar wird und nur noch Design bleibt.",
+          image: "/projects/wdvs/5.png",
         },
       ],
     },
@@ -146,19 +166,29 @@ export const segmentProjects: Record<string, LabsProject> = {
       tags: ["Natural", "Healthy", "Smooth"],
       slides: [
         {
-          title: "Untergrund",
-          description: "Vorbereitung für eine perfekte Haftung.",
+          title: "Materie",
+          description: "Natürliche Inhaltsstoffe für ein gesundes Raumklima.",
           image: "/projects/innenputz/1.png",
         },
         {
-          title: "Feinputz",
-          description: "Die Veredelung für seidenglatte Oberflächen.",
+          title: "Tiefe",
+          description: "Strukturierte Oberflächen, die den Raum beseelen.",
           image: "/projects/innenputz/2.png",
         },
         {
-          title: "Finish",
-          description: "Natürliche Pigmente und Strukturen.",
-          image: "/projects/innenputz/1.png", // Reuse high-end until user adds more
+          title: "Reflektion",
+          description: "Feinputze, die Licht sanft im Raum verteilen.",
+          image: "/projects/innenputz/3.png",
+        },
+        {
+          title: "Balance",
+          description: "Vorbereitung und Ausführung im perfekten Gleichgewicht.",
+          image: "/projects/innenputz/4.png",
+        },
+        {
+          title: "Purismus",
+          description: "Weniger ist mehr, wenn die Qualität stimmt.",
+          image: "/projects/innenputz/5.png",
         },
       ],
     },
@@ -183,19 +213,29 @@ export const segmentProjects: Record<string, LabsProject> = {
       tags: ["Robust", "Elegant", "Long-lasting"],
       slides: [
         {
-          title: "Grundputz",
-          description: "Der solide Schutz gegen Feuchtigkeit.",
+          title: "Visitenkarte",
+          description: "Ein Außenputz, der den Charakter Ihres Gebäudes unterstreicht.",
           image: "/projects/aussenputz/1.png",
         },
         {
-          title: "Gewebe",
-          description: "Sicherheit gegen Risse und Spannungen.",
+          title: "Kantenführung",
+          description: "Mathematische Präzision für klare Schattenwürfe.",
           image: "/projects/aussenputz/2.png",
         },
         {
-          title: "Struktur",
-          description: "Individuelle Oberflächen nach Ihrem Geschmack.",
-          image: "/projects/aussenputz/1.png", // Reuse high-end until user adds more
+          title: "Widerstand",
+          description: "Langlebige Oberflächen, die jedem Sturm trotzen.",
+          image: "/projects/aussenputz/3.png",
+        },
+        {
+          title: "Symmetrie",
+          description: "Harmonie zwischen Material, Form und Umgebung.",
+          image: "/projects/aussenputz/4.png",
+        },
+        {
+          title: "Statement",
+          description: "Architektur, die man nicht nur sieht, sondern fühlt.",
+          image: "/projects/aussenputz/5.png",
         },
       ],
     },
