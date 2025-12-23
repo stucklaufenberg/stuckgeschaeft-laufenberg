@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 
 const STEPS = [
   "Typ",
@@ -13,6 +14,8 @@ const STEPS = [
 
 export default function FormularPage() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     type: "",
     service: "",
@@ -181,12 +184,47 @@ export default function FormularPage() {
                 </div>
                 <div className="flex items-center gap-8 pt-8">
                   <button onClick={prevStep} className="section-label font-sans opacity-50 hover:opacity-100">Zurück</button>
-                  <button className="flex-1 bg-zinc-900 py-6 text-xs font-medium uppercase tracking-[0.3em] text-white transition-all hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200">Anfrage senden</button>
+                  <button 
+                    disabled={isSubmitting}
+                    onClick={async () => {
+                      setIsSubmitting(true);
+                      const { error } = await supabase.from("leads").insert([formData]);
+                      setIsSubmitting(false);
+                      if (!error) setIsSuccess(true);
+                      else alert("Fehler beim Senden. Bitte versuchen Sie es später erneut.");
+                    }}
+                    className="flex-1 bg-zinc-900 py-6 text-xs font-medium uppercase tracking-[0.3em] text-white transition-all hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  >
+                    {isSubmitting ? "Wird gesendet..." : "Anfrage senden"}
+                  </button>
                 </div>
                 <p className="text-center text-[10px] uppercase tracking-widest text-zinc-400">Mit dem Senden akzeptieren Sie unsere Datenschutzbestimmungen.</p>
               </div>
             )}
           </motion.div>
+        </AnimatePresence>
+
+        {/* Success State Overlay */}
+        <AnimatePresence>
+          {isSuccess && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-stone-50 p-6 dark:bg-zinc-950"
+            >
+              <div className="text-center space-y-12">
+                <div className="inline-block h-px w-24 bg-zinc-800 mb-8" />
+                <h2 className="font-serif text-5xl font-light italic leading-tight">Vielen Dank. <br /> Wir melden uns.</h2>
+                <p className="font-sans text-zinc-400 font-light max-w-md mx-auto">
+                  Ihre Anfrage wurde erfolgreich an Stuckgeschäft Laufenberg übermittelt. 
+                  Wir werden uns zeitnah mit Ihnen in Verbindung setzen.
+                </p>
+                <Link href="/" className="inline-block section-label pt-12 hover:text-foreground">
+                  Zurück zur Übersicht
+                </Link>
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </main>

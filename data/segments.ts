@@ -1,3 +1,12 @@
+/**
+ * ARCHITECTURE & SEGMENTS CONFIGURATION
+ * --------------------------------------
+ * To swap images: 
+ * 1. Place your new image in /public/projects/[folder]/
+ * 2. Update the 'image' path below.
+ * 3. The ScrollTimeline engine will handle the rest.
+ */
+
 import { LabsProject } from "./labs";
 
 export const segmentProjects: Record<string, LabsProject> = {
@@ -43,7 +52,7 @@ export const segmentProjects: Record<string, LabsProject> = {
     hero: {
       title: "Perfekte \n Putzsysteme für \n Neubauprojekte",
       subtitle: "Aura. Ästhetik. Langlebigkeit. \n Hochwertige Materialien für visionäre Architektur.",
-      image: "/projects/architekten/hero.jpg",
+      image: "/projects/architekten/uploaded_image_0_1766502821485.jpg",
       navLogo: "ARCHITEKTEN",
     },
     intro: {
@@ -58,19 +67,19 @@ export const segmentProjects: Record<string, LabsProject> = {
       tags: ["Professional", "Scale", "Precision"],
       slides: [
         {
-          title: "Planung",
+          title: "Konzeption",
           description: "Technische Details und Materialberatung für Großprojekte.",
-          image: "/projects/architekten/slide-1.jpg",
+          image: "/projects/architekten/uploaded_image_1_1766502821485.jpg",
         },
         {
-          title: "Logistik",
-          description: "Effiziente Abläufe auf der Baustelle.",
-          image: "/projects/architekten/slide-2.jpg",
+          title: "Ästhetik & Licht",
+          description: "Wir verstehen, wie Oberflächen mit Licht interagieren.",
+          image: "/projects/architekten/uploaded_image_2_1766502821485.png",
         },
         {
-          title: "Resultat",
-          description: "Sichtbare Qualität in jeder Fassade.",
-          image: "/projects/architekten/slide-3.jpg",
+          title: "Details",
+          description: "Sichtbare Qualität in jeder Kante.",
+          image: "/projects/architekten/uploaded_image_3_1766502821485.png",
         },
       ],
     },

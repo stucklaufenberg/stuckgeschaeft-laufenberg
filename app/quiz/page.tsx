@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 
 const QUESTIONS: {
   id: string;
@@ -52,6 +53,11 @@ export default function QuizPage() {
       setCurrentIdx(currentIdx + 1);
     } else {
       setIsFinished(true);
+      // Save quiz result to leads table (as a specific type/intent)
+      supabase.from("leads").insert([{ 
+        type: "quiz-lead", 
+        answers: { ...answers, [qId]: optId } 
+      }]).then();
     }
   };
 
