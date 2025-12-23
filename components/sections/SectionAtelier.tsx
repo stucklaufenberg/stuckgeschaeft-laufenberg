@@ -128,7 +128,7 @@ export default function SectionAtelier() {
             ref={(el) => { itemsRef.current[3] = el; }} 
             className="md:col-span-4 md:col-start-2"
           >
-            <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100 shadow-2xl dark:bg-zinc-900">
+            <div className="relative aspect-4/5 overflow-hidden bg-zinc-100 shadow-2xl dark:bg-zinc-900">
                <Image 
                  src={ATELIER_IMAGES[3].src} 
                  alt="Atelier Licht & Präzision" 

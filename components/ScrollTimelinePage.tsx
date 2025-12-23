@@ -119,7 +119,7 @@ export default function ScrollTimelinePage({ data }: Props) {
       {/* 0. CUSTOM CURSOR */}
       <div 
         ref={cursorRef}
-        className="pointer-events-none fixed left-0 top-0 z-[100] hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-stone-400 bg-transparent mix-blend-difference md:flex"
+        className="pointer-events-none fixed left-0 top-0 z-100 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-stone-400 bg-transparent mix-blend-difference md:flex"
       >
         <div className="h-1 w-1 rounded-full bg-stone-100" />
       </div>
@@ -223,7 +223,7 @@ export default function ScrollTimelinePage({ data }: Props) {
             </div>
 
             {/* 3. FUNNEL OVERLAY (Dynamic Exit) */}
-            <div className="funnel-overlay pointer-events-none absolute inset-0 z-[100] flex flex-col items-center justify-center bg-stone-100 p-8 text-center opacity-0 dark:bg-zinc-950">
+            <div className="funnel-overlay pointer-events-none absolute inset-0 z-100 flex flex-col items-center justify-center bg-stone-100 p-8 text-center opacity-0 dark:bg-zinc-950">
                <div className="pointer-events-auto max-w-2xl">
                  <span className="mb-8 block font-mono text-xs tracking-widest text-stone-500 uppercase">Der nächste Schritt</span>
                  <h2 className="mb-12 font-serif text-5xl font-light leading-tight md:text-8xl">Bereit für Ihre Vision?</h2>
