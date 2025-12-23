@@ -44,7 +44,7 @@ export default function DatenschutzPage() {
 
       <footer className="mt-24 pt-12 border-t border-zinc-100 dark:border-zinc-900">
         <Link href="/" className="section-label hover:text-foreground transition-colors inline-flex items-center gap-2">
-          ← Zurück zur Ausstellung
+          ← Zurück zum Hauptauftritt
         </Link>
       </footer>
     </main>
