@@ -24,23 +24,26 @@ export default function Header() {
         <Link href="/" className="group flex items-center gap-4">
           <div className="h-0.5 w-8 bg-zinc-900 transition-all group-hover:w-12 dark:bg-zinc-100" />
           <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-zinc-900 dark:text-zinc-100">
-            Antigravity
+            Laufenberg
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-12">
-          {["Projekte", "Atelier", "Kontakt"].map((item) => (
-            <button
-              key={item}
-              onClick={() => {
-                const id = item.toLowerCase();
-                document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="group relative overflow-hidden py-1 text-[10px] uppercase tracking-widest text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+        <nav className="hidden lg:flex items-center gap-10">
+          {[
+            { label: "Privatkunden", href: "/privatkunden" },
+            { label: "Architekten", href: "/architekten" },
+            { label: "Leistungen", href: "/#atelier" },
+            { label: "Quiz", href: "/quiz" },
+            { label: "Kontakt", href: "/#kontakt" }
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="group relative overflow-hidden py-1 text-[10px] uppercase tracking-widest text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
-              <span>{item}</span>
+              <span>{item.label}</span>
               <span className="absolute bottom-0 left-0 h-px w-0 bg-zinc-900 transition-all duration-500 group-hover:w-full dark:bg-zinc-100" />
-            </button>
+            </Link>
           ))}
         </nav>
 

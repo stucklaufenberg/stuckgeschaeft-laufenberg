@@ -1,27 +1,35 @@
+import { notFound } from "next/navigation";
+import { segmentProjects } from "@/data/segments";
 import ScrollTimelinePage from "@/components/ScrollTimelinePage";
 import SectionAtelier from "@/components/sections/SectionAtelier";
 import ContactForm from "@/components/ContactForm";
-import { labsProjects } from "@/data/labs";
 
-export default function Page() {
-  const project = labsProjects["stuck-laufenberg"];
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const project = segmentProjects[slug];
+
+  if (!project) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen w-full">
-      {/* High-Fidelity Labs Architecture Engine */}
       <ScrollTimelinePage data={project} />
       
-      {/* Integrated Sections from previous Home */}
-      <div id="atelier">
-        <SectionAtelier />
-      </div>
+      {/* Secondary Breath for Segments */}
+      <SectionAtelier />
 
+      {/* Direct CTA */}
       <section id="kontakt" className="flex min-h-screen items-center justify-center bg-stone-50 px-8 py-32 dark:bg-zinc-950">
         <div className="w-full">
           <div className="mb-24 text-center">
-            <span className="section-label mb-8 block translate-y-4 opacity-100 italic">Kontakt</span>
+            <span className="section-label mb-8 block translate-y-4 opacity-100 italic">Anfrage</span>
             <h2 className="font-serif text-5xl font-light italic text-foreground md:text-7xl">
-              Ihr Projekt <br /> in guten Händen.
+              Starten Sie Ihr <br /> Projekt mit uns.
             </h2>
           </div>
           <ContactForm />
